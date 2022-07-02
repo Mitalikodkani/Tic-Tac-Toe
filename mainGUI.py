@@ -10,16 +10,22 @@ root = Tk()
 root.title('Tic-Tac-Toe')
 
 #X starts, so... true
-clicked = True
+def start(a):
+    global clicked
+    clicked = a
 count = 0
 winner=False
 
 #Buttons
 def reset():
-    global b1, b2, b3, b4, b5, b6, b7, b8, b9
+    global b1, b2, b3, b4, b5, b6, b7, b8, b9, chooseBtnX, chooseBtnO
     global clicked, count
     clicked=True
     count= 0
+    if count==0:
+        chooseBtnX = Button(root, text=" X ", font=("Helvetica", 20), height=2, width=6, bg="red", command=lambda: start(True))
+        chooseBtnO = Button(root, text=" O ", font=("Helvetica", 20), height=2, width=6, bg="green", command=lambda: start(False))
+
     b1 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b1))
     b2 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b2))
     b3 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b3))
@@ -33,17 +39,20 @@ def reset():
     b9 = Button(root, text=" ", font=("Helvetica", 20), height=3, width=6, bg="SystemButtonFace", command=lambda: b_click(b9))
 
     #Grid our buttons to the screen
-    b1.grid(row=0, column=0)
-    b2.grid(row=0, column=1)
-    b3.grid(row=0, column=2)
+    chooseBtnX.grid(row=0, column=0)
+    chooseBtnO.grid(row=0, column=1)
 
-    b4.grid(row=1, column=0)
-    b5.grid(row=1, column=1)
-    b6.grid(row=1, column=2)
+    b1.grid(row=1, column=0)
+    b2.grid(row=1, column=1)
+    b3.grid(row=1, column=2)
 
-    b7.grid(row=2, column=0)
-    b8.grid(row=2, column=1)
-    b9.grid(row=2, column=2)
+    b4.grid(row=2, column=0)
+    b5.grid(row=2, column=1)
+    b6.grid(row=2, column=2)
+
+    b7.grid(row=3, column=0)
+    b8.grid(row=3, column=1)
+    b9.grid(row=3, column=2)
 
 #disable all buttons
 def disable_all_buttons():
@@ -126,6 +135,10 @@ def checkifwon():
     
     if count == 9 and winner == False:
         messagebox.showinfo("Tic Tac Toe", "It's a tie! \n No wins ")
+    
+    if count>0:
+        chooseBtnX.config(state=DISABLED)
+        chooseBtnO.config(state=DISABLED)
 
 #Button clicked function
 def b_click(b):
