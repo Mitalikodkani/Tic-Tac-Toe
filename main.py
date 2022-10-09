@@ -21,12 +21,15 @@ def map(xState,oState):
 def checkWin(xState,oState):
     wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
     for win in wins :
-        if(sum(xState[win[0]],xState[win[2]],xState[win[0]]) == 3):
+        if(sum(xState[win[0]],xState[win[1]],xState[win[2]]) == 3):
             print('Player X is the winner')
             return 1
         if(sum(oState[win[0]], oState[win[1]], oState[win[2]]) == 3):
             print("O Won the match")
             return 0
+        if((oState[0] == 1 or xState[0] == 1)and(oState[1] == 1 or xState[1] == 1)and(oState[2] == 1 or xState[2] == 1)and(oState[3] == 1 or xState[3] == 1)and(oState[4] == 1 or xState[4] == 1)and(oState[5] == 1 or xState[5] == 1)and(oState[6] == 1 or xState[6] == 1)and(oState[7] == 1 or xState[7] == 1)and(oState[8] == 1 or xState[8] == 1)):
+            print("It's a draw")
+            return 2
     return -1
 
 
